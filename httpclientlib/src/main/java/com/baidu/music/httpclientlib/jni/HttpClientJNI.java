@@ -3,7 +3,7 @@ package com.baidu.music.httpclientlib.jni;
 /**
  * Created by Jarlene on 2016/5/20.
  */
-public class JNI {
+public class HttpClientJNI {
 
     static {
         try {
@@ -12,12 +12,6 @@ public class JNI {
             e.printStackTrace();
         }
     }
-
-
-
-
-
-
 
     public static native String doHttpRequest(String url);
 }
