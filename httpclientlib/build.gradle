@@ -1,32 +1,35 @@
 apply plugin: 'com.android.library'
 
 android {
-    compileSdkVersion 23
-    buildToolsVersion "23.0.3"
+    compileSdkVersion 19
+    buildToolsVersion "19.1.0"
 
     defaultConfig {
         minSdkVersion 9
-        targetSdkVersion 11
+        targetSdkVersion 19
         versionCode 1000
         versionName "1.0.0.0"
 
         ndk {
             moduleName "HttpClient"
             stl "gnustl_static"
+            abiFilters "armeabi", "armeabi-v7a"
             ldLibs "log"
-            cFlags "-DANDROID_NDK -D_DEBUG DNULL=0"
+            cFlags "-std=gnu++11 -fpermissive -DDEBUG -O0"
         }
     }
     buildTypes {
         release {
-            minifyEnabled false
+            minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+        debug {
+            jniDebuggable true
         }
     }
 }
 
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
+    compile fileTree(include: ['*.jar'], dir: 'libs')
     testCompile 'junit:junit:4.12'
-    compile 'com.android.support:appcompat-v7:23.2.1'
 }

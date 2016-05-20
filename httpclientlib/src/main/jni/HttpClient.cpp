@@ -1,5 +1,5 @@
 //
-// Created by Administrator on 2016/5/20.
+// Created by Jarlene on 2016/5/20.
 //
 
 #include "HttpClient.h"

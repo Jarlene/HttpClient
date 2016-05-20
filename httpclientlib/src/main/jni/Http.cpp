@@ -2,12 +2,15 @@
 // Created by Jarlene on 2016/5/20.
 //
 
-#include "jni.h"
+#include <jni.h>
+#include <stdio.h>
+#include <assert.h>
 #include "log.h"
 
 #define LOG_TAG "Hook"
-#define HOOK_CLASS "com/baidu/music/httpclientlib/jni/HttpClientJNI"
+#define MAIN_CLASS "com/baidu/music/httpclientlib/jni/HttpClientJNI"
 
+static jclass mainClass;
 
 
 static void HttpRequest(JNIEnv* env, jclass clazz, jstring url) {
@@ -43,7 +46,7 @@ static JNINativeMethod nativeMethods[] = {
  * 注册native方法
  */
 static int registerNatives(JNIEnv* env) {
-    if (!registerNativeMethods(env, HOOK_CLASS, nativeMethods,
+    if (!registerNativeMethods(env, MAIN_CLASS, nativeMethods,
                                sizeof(nativeMethods) / sizeof(nativeMethods[0]))) {
         return JNI_FALSE;
     }

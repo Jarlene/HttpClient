@@ -1,7 +1,7 @@
 package com.baidu.music.httpclientlib;
 
 /**
- * Created by Administrator on 2016/5/20.
+ * Created by Jarlene on 2016/5/20.
  */
 public class HttpClient {
     private static volatile HttpClient ourInstance = null;
