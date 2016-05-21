@@ -13,6 +13,7 @@ android {
         ndk {
             moduleName "HttpClient"
             stl "gnustl_static"
+            //stl "stlport_shared"
             abiFilters "armeabi", "armeabi-v7a"
             ldLibs "log"
             cFlags "-std=gnu++11 -fpermissive -DDEBUG -O0"

@@ -5,16 +5,15 @@
 #include <jni.h>
 #include <stdio.h>
 #include <assert.h>
-#include "log.h"
+#include "base/log.h"
 
 #define LOG_TAG "Hook"
 #define MAIN_CLASS "com/baidu/music/httpclientlib/jni/HttpClientJNI"
 
 static jclass mainClass;
 
-
-static void HttpRequest(JNIEnv* env, jclass clazz, jstring url) {
-
+static jstring httpRequest(JNIEnv* env, jclass clazz, jstring url) {
+    return NULL;
 }
 
 static int registerNativeMethods(JNIEnv* env, const char* className,
@@ -35,7 +34,7 @@ static int registerNativeMethods(JNIEnv* env, const char* className,
  * native方法映射
  */
 static JNINativeMethod nativeMethods[] = {
-        { "doHttpRequest", "(Ljava/lang/String)Ljava/lang/String", (void*)HttpRequest }
+        { "doHttpRequest", "(Ljava/lang/String)Ljava/lang/String", (void*)httpRequest }
 };
 
 
