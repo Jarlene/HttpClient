@@ -13,7 +13,7 @@
 static jclass mainClass;
 
 static jstring httpRequest(JNIEnv* env, jclass clazz, jstring url) {
-    return NULL;
+    return url;
 }
 
 static int registerNativeMethods(JNIEnv* env, const char* className,

@@ -1,5 +1,7 @@
 package com.baidu.music.httpclientlib;
 
+import com.baidu.music.httpclientlib.jni.HttpClientJNI;
+
 /**
  * Created by Jarlene on 2016/5/20.
  */
@@ -18,5 +20,10 @@ public class HttpClient {
     }
 
     private HttpClient() {
+    }
+
+
+    public String getBaiduUrl() {
+        return HttpClientJNI.httpRequest("https://www.baidu.com");
     }
 }
