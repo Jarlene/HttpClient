@@ -1,22 +1,27 @@
+//import org.apache.tools.ant.taskdefs.condition.Os
+
 apply plugin: 'com.android.library'
 
 android {
-    compileSdkVersion 19
-    buildToolsVersion "19.1.0"
-
     defaultConfig {
-        minSdkVersion 9
-        targetSdkVersion 19
+        compileSdkVersion 23
+        buildToolsVersion "23.0.3"
         versionCode 1000
         versionName "1.0.0.0"
 
         ndk {
             moduleName "HttpClient"
-            stl "gnustl_static"
-            //stl "stlport_shared"
+//            stl "gnustl_static"
+            stl "stlport_shared"
+            cFlags "-std=gnu++11"
             abiFilters "armeabi", "armeabi-v7a"
-            ldLibs "log"
-            cFlags "-std=gnu++11 -fpermissive -DDEBUG -O0"
+            String basePath = new File("./").canonicalPath + "/httpclientlib/src/main/jniLibs/armeabi/"
+            String libevent =  basePath + "libevent.so"
+            String libevent_core = basePath + "libevent_core.so"
+            String libevent_extra = basePath + "libevent_extra.so"
+            String libevent_pthreads = basePath + "libevent_pthread.so"
+            ldLibs "log", libevent, libevent_core, libevent_extra,libevent_pthreads
+
         }
     }
     buildTypes {
@@ -29,9 +34,17 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
-    tasks.withType(JavaCompile) {
-        compileTask -> compileTask.dependsOn clearJar, makeJar
+
+    sourceSets {
+        main {
+            jni.srcDirs  "src/main/jni", "src/main/jni/include"
+            jniLibs.srcDirs "src/main/jinLibs"
+        }
     }
+
+//    tasks.withType(JavaCompile) {
+//        compileTask -> compileTask.dependsOn clearJar, makeJar
+//    }
 }
 
 task clearJar(type: Delete) {

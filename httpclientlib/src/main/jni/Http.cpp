@@ -6,20 +6,26 @@
 #include <stdio.h>
 #include <assert.h>
 #include "base/log.h"
+#include "HttpManager.h"
 
-#define LOG_TAG "Hook"
+#define LOG_TAG "Http"
 #define MAIN_CLASS "com/baidu/music/httpclientlib/jni/HttpClientJNI"
 
 static jclass mainClass;
 
 static jstring httpRequest(JNIEnv* env, jclass clazz, jstring url) {
-    return url;
+    jboolean isCopy = JNI_TRUE;
+    const char * uri = env->GetStringUTFChars(url, &isCopy);
+    char * result = HttpManager::getInstance()->doHttpGet(uri);
+    jstring res = env->NewStringUTF(result);
+    delete uri;
+    return res;
 }
 
 static int registerNativeMethods(JNIEnv* env, const char* className,
                                  JNINativeMethod* gMethods, int numMethods) {
     jclass clazz= env->FindClass(className);
-    mainClass = env->NewGlobalRef(clazz);
+    mainClass = (jclass) env->NewGlobalRef(clazz);
     if (clazz == NULL) {
         return JNI_FALSE;
     }

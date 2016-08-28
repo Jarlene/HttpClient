@@ -9,6 +9,11 @@ public class HttpClientJNI {
 
     static {
         try {
+            System.loadLibrary("event");
+            System.loadLibrary("event_core");
+            System.loadLibrary("event_extra");
+            System.loadLibrary("event_extra");
+            System.loadLibrary("event_pthreads");
             System.loadLibrary("HttpClient");
         } catch (Exception e) {
             e.printStackTrace();
